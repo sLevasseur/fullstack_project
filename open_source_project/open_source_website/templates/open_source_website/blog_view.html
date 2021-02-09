@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="fr-fr">
+
+<head>
+    {% load static %}
+    {% include "./head.html" %}
+</head>
+
+<body onLoad="javascript:init();">
+
+    <div class="brand">OPEN SOURCE</div>
+    <div class="address-bar">Something nice</div>
+
+
+    <!-- Navigation -->
+    {% include "./nav.html" %}
+ 
+    <div class=".container-md">
+        <div class="row">
+            <div class="box">
+                <div>
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        Something
+                        <strong>NICE</strong>
+                    </h2>
+                </div>
+                
+                <div>
+                    <hr>
+                    
+                    <div class="text-center">
+                        <p><h3><strong>{{blog_specific.title}} :</strong></h3></p>
+                    </div>
+                    <br />
+                    <hr class="visible-xs">
+                    <div class="col-9 text-justify">
+                        <p>
+                            {{blog_specific.text|safe}}
+                        </p>
+                        <br />
+                    </div>
+                    <div class="text-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default" onclick="window.location.href='/open_source/blog/#ancre_blog'">
+                            Retour
+                        </button>
+                    </div>
+                    <br />
+                    
+                    <p class="textdate"><small>{{blog_specific.date}}</small></p>
+                     
+                    </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row" id="ancre_nous_trouver">
+            <div class="box">
+                <div class="col-lg-12 text-center">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Nous trouver:</strong>
+                    </h2>
+
+                    <div id="map" style="width:100%; height:350px;" class="item-center"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+            <!-- /.container -->
+            {% include "./footer.html" %}>
+
+            <!-- jQuery -->
+            <script src="{% static 'open_source_website/js/jquery.js' %}"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{% static 'open_source_website/js/bootstrap.min.js' %}"></script>
+            <!-- Script to initialize the map-->
+            <script language="javascript">
+            function init() {
+                var positions = JSON.parse("{{ map_positions|escapejs}}");
+                var map = new L.Map('map');
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+                    maxZoom: 18
+                }).addTo(map);
+                var normandie = new L.LatLng(49.7171682165637, 1.238358383189674);
+                map.setView(normandie, 8);
+                for (var i = 0; i < positions.length; i++) {
+                    var location = positions[i];
+                    var lat = location["lat"];
+                    var long = location["long"];
+
+                    var location_ = location["name_of_location"];
+                    var adresse = location["adresse"];
+                    var code_postal = location["code_postal"];
+                    var localite = location["localite"];
+                    var info = location["informations_supplementaires"];
+                    var text = `<p><strong> ${location_} </ strong> <br /><hr> ${adresse}, ${code_postal} ${localite} <br /> <hr> ${info}</p>`;
+
+                    var markerLocation = new L.latLng(lat, long);
+                    var marker = new L.Marker(markerLocation);
+                    map.addLayer(marker);
+                    marker.bindPopup(text);
+                }
+            }
+            </script>
+    
+</body>
+</html>

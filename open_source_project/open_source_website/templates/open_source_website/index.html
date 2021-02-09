@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html lang="fr-fr">
+
+<head>
+    <meta name="viewport">
+
+    {% load static %}
+    {% include "./head.html" %}
+</head>
+
+<body id="hautdepage" onLoad="javascript:init();">
+
+    <div class="brand">OPEN SOURCE</div>
+    <div class="address-bar">Something nice</div>
+
+    <!-- Navigation -->
+    {% include "./nav.html" %}>
+
+
+    <div class=".container-md" id="container_banniere">
+        <div class="row">
+            <div class="box">
+                <div>
+                    <div class="col-lg-12 text-center">
+                        <h2 class="brand-before">
+                            <small>Bienvenue</small>
+                        </h2>
+                        <hr class="tagline-divider">
+                        <br />
+                        <div id="carousel-example-generic" class="carousel slide">
+
+
+                            <!-- Wrapper for slides -->
+                            <div class="parent">
+                                <div class="carousel-inner">
+                                    <div class="item active embed-responsive embed-responsive-16by9">
+                                        <video autoplay loop muted playsinline>
+                                            <source src="../static/open_source_website/blog_img/coast_Trim.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <div class="item  embed-responsive embed-responsive-16by9">
+                                        <video autoplay loop muted playsinline>
+                                            <source src="../static/open_source_website/blog_img/drone_Trim.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <div class="item  embed-responsive embed-responsive-16by9">
+                                        <video autoplay loop muted playsinline>
+                                            <source src="../static/open_source_website/blog_img/walk_Trim.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                 </div>
+                                <div>
+                                    <img id="banniereBakpak" class="img-responsive img-full" src="../static/open_source_website/img/banner_open_source.png" />
+                                </div>
+                            </div>
+                            <!-- Controls -->
+
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="icon-prev"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="icon-next"></span>
+                            </a>
+                        </div>
+                        <hr class="tagline-divider">
+                        <br />
+
+
+                        <h3>
+                            <strong>La bière qui fait voyager vos papilles !</strong>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="ancre_apropos">
+            <div class="box">
+                <div>
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>A propos</strong>
+                    </h2>
+                    <hr>
+                    <div class="col-lg-3">
+                        <img class="img-responsive img-border img-left" src="../static/open_source_website/img/a_propos_open_source.jpg" alt="">
+                    </div>
+                    <hr class="visible-xs">
+                    <div class="col-lg-9">
+                        <p>Lorem ipsum dolor sit amet. <br /> </p>
+                        <p class="text-justify">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere interdum nulla in ornare.
+                            Vivamus varius lacus bibendum urna pretium tempus. Nunc a aliquet massa, sed dictum nulla.
+                            Sed sapien ipsum, pellentesque ac sem ac, feugiat laoreet magna. Quisque lobortis felis turpis,
+                            eget tristique ante tincidunt ac. Cras placerat lorem eleifend purus dapibus vestibulum.
+                            Vestibulum eros velit, imperdiet eu diam nec, imperdiet pulvinar tellus.
+                            Nam vestibulum ex vel ipsum vulputate pulvinar.
+                            Etiam lobortis, dolor vel varius semper, risus dui ultrices augue, id faucibus nibh augue
+                            viverra lectus. Etiam ut turpis tortor. Proin aliquam faucibus vestibulum.
+                            Aliquam in viverra ante, eu rutrum erat. Duis aliquam justo vitae eros dictum,
+                            eget aliquam elit sodales. Mauris at cursus risus.
+                        </p>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="ancre_actualites">
+
+            <div class="box ">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Actualités</strong>
+                    </h2>
+                    <hr>
+                    <p class="text-center font-weight-bold"><h3><strong>{{last_blog.title}} :</strong></h3></p>
+                    <br />
+                    <div class="col-3">
+                       <hr class="visible-xs">
+                        <div class="col-9">
+                            <div class="text-justify toggle_text">
+                                {{last_blog.text|safe}}
+                                
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center" id="ancre_newsletter">
+                    <br />
+                    <hr />
+                    <p><small><a href="/open_source/blog/">Cliquez ici</a>  pour être redirigé vers toutes nos actualités !</small></p>
+                    <div id="ancre_newsletter_message">
+                        <small>
+                            Pour s'inscrire à la newsletter et être tenu au courant
+                            de nos derniéres actualités (promis, pas de spam &#128578; ) :
+                        </small>
+                        <br />
+
+                        <br />
+                        {% if message_newsletter %}
+                            {% if state == True %}
+                            <div class="subscribe_success">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                <p>{{message_newsletter|safe}}</p>
+                            </div>
+                            {% else %}
+                            <div class="subscribe_failed">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                <p>{{message_newsletter|safe}}</p>
+
+                                <br />
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    
+                    <form action="/open_source/#ancre_newsletter_message" method="post">
+                        {% csrf_token %}
+                        {{ newsletter_form.as_p }}
+                        <br />
+                        <input type="submit" value="Inscription" name="newsletter_form">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center" id="ancre_contact">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Contact</strong>
+                    </h2>
+                    <hr>
+                    <h3>Pour nous écrire:</h3>
+                    {% if message_contact %}
+                        {% if state %}
+                        <div class="subscribe_success">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <p >{{message_contact|safe}}</p>
+                        </div>
+                        {% else %}
+                        <div class="subscribe_failed">
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                            <p >{{message_contact|safe}}</p>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                        <form class="text-center" action="#ancre_contact" method="post">
+                            {% csrf_token %}
+                            <br />
+                            <div class="contactList text-center">
+                                <p id="subject" class="contact">{{ contact_form.email }}</p>
+                                <p id="email" class="contact">{{ contact_form.sujet }}</p>
+                                <p id="message" class="contact">{{ contact_form.message }}</p>
+                            </div>
+                            <input type="submit" value="Envoyer !" name="contact_form">
+                        </form>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="ancre_nous_trouver">
+            <div class="box">
+                <div class="col-lg-12 text-center">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>Nous trouver:</strong>
+                    </h2>
+                    <div id="map" style="width:100%; height:350px;"></div>
+                    <div>
+                        <br />
+                        <p style="text-align: right;">
+                            <a href="/open_source/#hautdepage">Haut de page</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+    {% include "./footer.html" %}
+
+    <!-- jQuery -->
+    <script src="{% static 'open_source_website/js/jquery.js' %}"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'open_source_website/js/bootstrap.min.js' %}"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+        $('.carousel').carousel({
+            interval: 7500 //changes the speed
+        })
+    </script>
+    <!-- Script to initialize the map-->
+    <script language="javascript" >
+            function init() {
+                var positions = JSON.parse("{{ map_positions|escapejs}}");
+                var map = new L.Map('map');
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+                    maxZoom: 18
+                }).addTo(map);
+                var normandie = new L.LatLng(49.7171682165637, 1.238358383189674);
+                map.setView(normandie, 8);
+                for (var i = 0; i < positions.length; i++) {
+                    var location = positions[i];
+                    var lat = location["lat"];
+                    var long = location["long"];
+
+                    var location_ = location["name_of_location"];
+                    var adresse = location["adresse"];
+                    var code_postal = location["code_postal"];
+                    var localite = location["localite"];
+                    var info = location["informations_supplementaires"];
+                    var text = `<p><strong> ${location_} </ strong> <br /><hr> ${adresse}, ${code_postal} ${localite} <br /> <hr> ${info}</p>`;
+
+                    var markerLocation = new L.latLng(lat, long);
+                    var marker = new L.Marker(markerLocation);
+                    map.addLayer(marker);
+                    marker.bindPopup(text);
+                }
+            }
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+
+</body>
+</html>
